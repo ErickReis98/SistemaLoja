@@ -1,0 +1,18 @@
+CREATE TABLE departamento (
+  id int NOT NULL AUTO_INCREMENT,
+  nome varchar(80) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `vendedor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(80) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `dataAniversario` date NOT NULL,
+  `salario` double NOT NULL,
+  `idDepartamento` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `_idx` (`idDepartamento`),
+  CONSTRAINT `` FOREIGN KEY (`idDepartamento`) REFERENCES `departamento` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
