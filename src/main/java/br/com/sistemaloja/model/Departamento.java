@@ -1,4 +1,4 @@
-package br.com.daotest.model;
+package br.com.sistemaloja.model;
 
 import java.util.List;
 

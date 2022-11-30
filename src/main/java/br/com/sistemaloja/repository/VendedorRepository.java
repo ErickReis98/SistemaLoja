@@ -1,4 +1,4 @@
-package br.com.daotest.repository;
+package br.com.sistemaloja.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.daotest.model.Vendedor;
+import br.com.sistemaloja.model.Vendedor;
 
 @Repository
 public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
