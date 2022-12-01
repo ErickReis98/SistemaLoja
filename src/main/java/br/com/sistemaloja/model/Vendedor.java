@@ -12,14 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "vendedor")
 public class Vendedor {
 

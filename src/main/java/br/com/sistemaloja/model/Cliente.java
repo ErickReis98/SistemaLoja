@@ -1,68 +1,54 @@
 package br.com.sistemaloja.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
-import javax.persistence.FetchType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
 
-
-public class Departamento {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
+@Table(name = "cliente")
+public class Cliente {
 
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idDepartamento")
 	private Long id;
 	
-	@Column(name = "nome")
 	private String nome;
+	private String email;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "departamento", fetch = FetchType.EAGER)
-	private List<Vendedor> vendedor;
-	
+	@Column(name = "fone")
+	private String telefone;
 	
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
 	public String getNome() {
 		return nome;
 	}
-
-	
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	@JsonIgnore
-	public List<Vendedor> getVendedor() {
-		return vendedor;
+	public String getEmail() {
+		return email;
 	}
-
-	@JsonIgnore
-	public void setVendedor(List<Vendedor> vendedor) {
-		this.vendedor = vendedor;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
-	
-
-
-	
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 	
 	
 }
