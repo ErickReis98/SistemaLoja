@@ -1,4 +1,4 @@
-package br.com.sistemaloja.controller;
+package br.com.sistemaloja.api.controller;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sistemaloja.model.Vendedor;
-import br.com.sistemaloja.repository.VendedorRepository;
+import br.com.sistemaloja.domain.controller.model.Vendedor;
+import br.com.sistemaloja.domain.controller.repository.VendedorRepository;
 
 @RestController
 @RequestMapping(value = "/vendedor")

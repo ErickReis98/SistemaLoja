@@ -1,4 +1,4 @@
-package br.com.sistemaloja.controller;
+package br.com.sistemaloja.api.controller;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sistemaloja.model.Departamento;
-import br.com.sistemaloja.repository.DepartamentoRepository;
+import br.com.sistemaloja.domain.controller.model.Departamento;
+import br.com.sistemaloja.domain.controller.repository.DepartamentoRepository;
 
 @RestController
 @RequestMapping("/departamentos")

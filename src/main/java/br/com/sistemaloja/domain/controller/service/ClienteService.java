@@ -1,4 +1,4 @@
-package br.com.sistemaloja.service;
+package br.com.sistemaloja.domain.controller.service;
 
 
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.sistemaloja.model.Cliente;
-import br.com.sistemaloja.repository.ClienteRepository;
+import br.com.sistemaloja.domain.controller.model.Cliente;
+import br.com.sistemaloja.domain.controller.repository.ClienteRepository;
 
 @Service
 public class ClienteService {

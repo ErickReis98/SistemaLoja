@@ -1,4 +1,4 @@
-package br.com.sistemaloja.model;
+package br.com.sistemaloja.domain.controller.model;
 
 import java.util.List;
 
@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 
-
 public class Departamento {
 
 	@EqualsAndHashCode.Include
@@ -21,15 +20,14 @@ public class Departamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idDepartamento")
 	private Long id;
-	
+
 	@Column(name = "nome")
 	private String nome;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "departamento", fetch = FetchType.EAGER)
 	private List<Vendedor> vendedor;
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -38,12 +36,9 @@ public class Departamento {
 		this.id = id;
 	}
 
-	
 	public String getNome() {
 		return nome;
 	}
-
-	
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -58,11 +53,5 @@ public class Departamento {
 	public void setVendedor(List<Vendedor> vendedor) {
 		this.vendedor = vendedor;
 	}
-	
-	
 
-
-	
-	
-	
 }

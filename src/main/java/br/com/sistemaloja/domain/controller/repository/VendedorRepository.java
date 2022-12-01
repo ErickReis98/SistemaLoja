@@ -1,4 +1,4 @@
-package br.com.sistemaloja.repository;
+package br.com.sistemaloja.domain.controller.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.sistemaloja.model.Vendedor;
+import br.com.sistemaloja.domain.controller.model.Vendedor;
 
 @Repository
 public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
