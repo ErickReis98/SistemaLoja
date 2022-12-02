@@ -21,7 +21,7 @@ import br.com.sistemaloja.domain.controller.model.Funcionario;
 import br.com.sistemaloja.domain.controller.repository.FuncionarioRepository;
 
 @RestController
-@RequestMapping(value = "/vendedor")
+@RequestMapping(value = "/funcionarios")
 public class FuncionarioController {
 
 	@Autowired

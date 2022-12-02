@@ -14,7 +14,7 @@ public class Destinatario {
 	private String numero;
 	@Column(name = "destinatario_complemento")
 	private String complemento;
-	@Column(name = "destinatario__bairro")
+	@Column(name = "destinatario_bairro")
 	private String bairro;
 	
 	

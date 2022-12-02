@@ -17,7 +17,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
 	@Query(value = "select v.nome, v.email, v.salario, v. data_nascimento, v.departamento.nome from Funcionario v  where v.departamento.id = :departamento_id")
 	List<Object> findByDepContaning(@Param("departamento_id") Long departamento_id);
 	 
-	@Query(value = "select v.nome, v.email, v.salario, v.departamento.id from Funcionario v where v.nome like %:nome%")
+	@Query(value = "select v.nome, v.email, v.salario, v.departamento.id, v.departamento.nome from Funcionario v where v.nome like %:nome%")
 	List<Object> findByNomeContaining(@Param("nome")String nome);
 	
 
