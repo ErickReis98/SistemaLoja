@@ -3,6 +3,7 @@ package br.com.sistemaloja.domain.controller.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 
+@Entity
 public class Departamento {
 
 	@EqualsAndHashCode.Include
@@ -26,7 +28,7 @@ public class Departamento {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "departamento", fetch = FetchType.EAGER)
-	private List<Vendedor> vendedor;
+	private List<Funcionario> funcionario;
 
 	public Long getId() {
 		return id;
@@ -45,13 +47,13 @@ public class Departamento {
 	}
 
 	@JsonIgnore
-	public List<Vendedor> getVendedor() {
-		return vendedor;
+	public List<Funcionario> getVendedor() {
+		return funcionario;
 	}
 
 	@JsonIgnore
-	public void setVendedor(List<Vendedor> vendedor) {
-		this.vendedor = vendedor;
+	public void setVendedor(List<Funcionario> funcionario) {
+		this.funcionario = funcionario;
 	}
 
 }

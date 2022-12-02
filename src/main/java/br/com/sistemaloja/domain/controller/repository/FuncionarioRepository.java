@@ -7,17 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.sistemaloja.domain.controller.model.Vendedor;
+import br.com.sistemaloja.domain.controller.model.Funcionario;
 
 @Repository
-public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 
 	//quando puxar id de outra classe(chave estrangeira) usar ponto . como separador na sintaxe da query
 	// não necessario usar o JOIN
-	@Query(value = "select v.nome, v.email, v.salario, v. data_nascimento, v.departamento.nome from Vendedor v  where v.departamento.id = :id_departamento")
-	List<Object> findByDepContaning(@Param("id_departamento") Long id_departamento);
+	@Query(value = "select v.nome, v.email, v.salario, v. data_nascimento, v.departamento.nome from Funcionario v  where v.departamento.id = :departamento_id")
+	List<Object> findByDepContaning(@Param("departamento_id") Long departamento_id);
 	 
-	@Query(value = "select v.nome, v.email, v.salario, v.departamento.id from Vendedor v where v.nome like %:nome%")
+	@Query(value = "select v.nome, v.email, v.salario, v.departamento.id from Funcionario v where v.nome like %:nome%")
 	List<Object> findByNomeContaining(@Param("nome")String nome);
 	
 

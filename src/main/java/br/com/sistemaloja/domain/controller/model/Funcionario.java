@@ -16,8 +16,8 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "vendedor")
-public class Vendedor {
+@Table(name = "funcionario")
+public class Funcionario {
 
 	@EqualsAndHashCode.Include
 	@Id
@@ -36,7 +36,7 @@ public class Vendedor {
 	
 	
 	@ManyToOne(fetch = javax.persistence.FetchType.EAGER)
-	@JoinColumn(name = "id_departamento")
+	@JoinColumn(name = "departamento_id")
 	private Departamento departamento;
 
 	public Long getId() {

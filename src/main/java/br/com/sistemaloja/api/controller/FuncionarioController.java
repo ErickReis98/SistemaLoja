@@ -17,42 +17,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sistemaloja.domain.controller.model.Vendedor;
-import br.com.sistemaloja.domain.controller.repository.VendedorRepository;
+import br.com.sistemaloja.domain.controller.model.Funcionario;
+import br.com.sistemaloja.domain.controller.repository.FuncionarioRepository;
 
 @RestController
 @RequestMapping(value = "/vendedor")
-public class VendedorController {
+public class FuncionarioController {
 
 	@Autowired
-	private VendedorRepository vendRepo;
+	private FuncionarioRepository funcRepo;
 	
 	
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Vendedor adicionarDepartamento(@RequestBody Vendedor vend) {
-		return vendRepo.save(vend);
+	public Funcionario adicionarDepartamento(@RequestBody Funcionario func) {
+		return funcRepo.save(func);
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Vendedor>> findAll() {
-		List<Vendedor> vend = vendRepo.findAll();
-		return ResponseEntity.ok().body(vend);
+	public ResponseEntity<List<Funcionario>> findAll() {
+		List<Funcionario> func = funcRepo.findAll();
+		return ResponseEntity.ok().body(func);
 	}
 	
 	
 	@GetMapping(value = "findByDep")
-	public ResponseEntity<List<Object>> findByDep(@RequestParam(name = "id_departamento") Long id_departamento) {
-		List<Object> vend = vendRepo.findByDepContaning(id_departamento);
-		return new ResponseEntity<List<Object>>(vend, HttpStatus.OK);
+	public ResponseEntity<List<Object>> findByDep(@RequestParam(name = "departamento_id") Long departamento_id) {
+		List<Object> func = funcRepo.findByDepContaning(departamento_id);
+		return new ResponseEntity<List<Object>>(func, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "findByNome")
 	@ResponseBody
 	public ResponseEntity<List<Object>> findByNome(@RequestParam (name = "nome")String nome){
-		List<Object> vendedor = vendRepo.findByNomeContaining(nome);
-		return new ResponseEntity<List<Object>>(vendedor, HttpStatus.OK);
+		List<Object> func = funcRepo.findByNomeContaining(nome);
+		return new ResponseEntity<List<Object>>(func, HttpStatus.OK);
 	}
 	 
 
@@ -60,22 +60,22 @@ public class VendedorController {
 
 	@DeleteMapping({"/{vendId}"})
 	public ResponseEntity<Void> deletarVend(@PathVariable Long vendId) {
-		if (!vendRepo.existsById(vendId)) {
+		if (!funcRepo.existsById(vendId)) {
 			return ResponseEntity.noContent().build();
 		}
-		vendRepo.deleteById(vendId);
+		funcRepo.deleteById(vendId);
 		return ResponseEntity.noContent().build();
 
 	}
 
 	@PutMapping("{vendId}")
-	public ResponseEntity<Vendedor> atualizarVend(@PathVariable Long vendId, @RequestBody Vendedor vendedor) {
-		if (!vendRepo.existsById(vendId)) {
+	public ResponseEntity<Funcionario> atualizarVend(@PathVariable Long vendId, @RequestBody Funcionario funcionario) {
+		if (!funcRepo.existsById(vendId)) {
 			return ResponseEntity.noContent().build();
 		}
-		vendedor.setId(vendId);
-		vendedor = vendRepo.save(vendedor);
-		return ResponseEntity.ok(vendedor);
+		funcionario.setId(vendId);
+		funcionario = funcRepo.save(funcionario);
+		return ResponseEntity.ok(funcionario);
 	}
 
 }

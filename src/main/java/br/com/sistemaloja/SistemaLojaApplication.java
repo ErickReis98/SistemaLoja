@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DaoTestApplication {
+public class SistemaLojaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DaoTestApplication.class, args);
+		SpringApplication.run(SistemaLojaApplication.class, args);
 	}
 
 }
