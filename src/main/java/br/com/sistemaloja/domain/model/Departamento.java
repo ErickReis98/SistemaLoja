@@ -22,7 +22,7 @@ public class Departamento {
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idDepartamento")
+	@Column(name = "id_departamento")
 	private Long id;
 
 	@Column(name = "nome")

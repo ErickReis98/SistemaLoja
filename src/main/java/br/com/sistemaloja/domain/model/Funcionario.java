@@ -36,7 +36,7 @@ public class Funcionario {
 	
 	
 	@ManyToOne(fetch = javax.persistence.FetchType.EAGER)
-	@JoinColumn(name = "departamento_id")
+	@JoinColumn(name = "id_departamento")
 	private Departamento departamento;
 
 	public Long getId() {

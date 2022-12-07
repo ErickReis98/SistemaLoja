@@ -30,6 +30,12 @@ public class FuncionarioController {
 
 	private FuncionarioService funcServ;
 
+	public FuncionarioController(FuncionarioRepository funcRepo, FuncionarioService funcServ) {
+		super();
+		this.funcRepo = funcRepo;
+		this.funcServ = funcServ;
+	}
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Funcionario> adicionarFuncionario(@RequestBody Funcionario func) {
@@ -60,7 +66,8 @@ public class FuncionarioController {
 
 	@GetMapping(value = "findByDep")
 	public ResponseEntity<List<Object>> findByDep(@RequestParam(name = "id_departamento") Long id_departamento) {
-		return new ResponseEntity<List<Object>>(funcServ.findByDepartamento(id_departamento), HttpStatus.OK);
+		List<Object> func =  funcRepo.findByDepContaning(id_departamento);
+		return new ResponseEntity<List<Object>>(func, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "findByNome")

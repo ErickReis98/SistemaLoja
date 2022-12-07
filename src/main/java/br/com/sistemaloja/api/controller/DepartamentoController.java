@@ -28,6 +28,12 @@ public class DepartamentoController {
 
 	private DepartamentoService depService;
 
+	public DepartamentoController(DepartamentoRepository depRepo, DepartamentoService depService) {
+		super();
+		this.depRepo = depRepo;
+		this.depService = depService;
+	}
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Departamento> adicionarDepartamento(@RequestBody Departamento dep) {
