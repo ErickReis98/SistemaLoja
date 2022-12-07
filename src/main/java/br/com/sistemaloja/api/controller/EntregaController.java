@@ -7,21 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sistemaloja.domain.controller.model.Entrega;
-import br.com.sistemaloja.domain.controller.service.SolicitacaoEntregaService;
+import br.com.sistemaloja.domain.model.Entrega;
+import br.com.sistemaloja.domain.service.EntregaService;
+
 
 @RestController
 @RequestMapping("/entregas")
 public class EntregaController {
 
-	private SolicitacaoEntregaService soliServ;
-	
-	
-	public EntregaController(SolicitacaoEntregaService soliServ) {
+	private EntregaService soliServ;
+
+	public EntregaController(EntregaService soliServ) {
 		super();
 		this.soliServ = soliServ;
 	}
-
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)

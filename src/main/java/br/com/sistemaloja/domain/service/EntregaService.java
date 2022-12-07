@@ -1,20 +1,20 @@
-package br.com.sistemaloja.domain.controller.service;
+package br.com.sistemaloja.domain.service;
 
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.sistemaloja.domain.controller.model.Entrega;
-import br.com.sistemaloja.domain.controller.model.StatusEntrega;
-import br.com.sistemaloja.domain.controller.repository.EntregaRepository;
+import br.com.sistemaloja.domain.model.Entrega;
+import br.com.sistemaloja.domain.model.StatusEntrega;
+import br.com.sistemaloja.domain.repository.EntregaRepository;
 
 @Service
-public class SolicitacaoEntregaService {
+public class EntregaService {
 
 	private EntregaRepository entregaRepo;
-
-	public SolicitacaoEntregaService(EntregaRepository entregaRepo) {
+	
+	public EntregaService(EntregaRepository entregaRepo) {
 		super();
 		this.entregaRepo = entregaRepo;
 	}
@@ -26,5 +26,4 @@ public class SolicitacaoEntregaService {
 		
 		return entregaRepo.save(entrega);
 	}
-	
 }

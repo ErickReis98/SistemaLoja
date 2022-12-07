@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sistemaloja.domain.controller.model.Departamento;
-import br.com.sistemaloja.domain.controller.repository.DepartamentoRepository;
+import br.com.sistemaloja.domain.model.Departamento;
+import br.com.sistemaloja.domain.repository.DepartamentoRepository;
+import br.com.sistemaloja.domain.service.DepartamentoService;
 
 @RestController
 @RequestMapping("/departamentos")
@@ -24,37 +25,34 @@ public class DepartamentoController {
 
 	@Autowired
 	private DepartamentoRepository depRepo;
-	
+
+	private DepartamentoService depService;
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Departamento adicionarDepartamento(@RequestBody Departamento dep) {
-		return depRepo.save(dep);
+	public ResponseEntity<Departamento> adicionarDepartamento(@RequestBody Departamento dep) {
+		return ResponseEntity.ok().body(depService.adicionar(dep));
 	}
-	
+
 	@GetMapping
-	public List<Departamento> findAll(Departamento dep){
-		return depRepo.findAll();
+	public ResponseEntity<List<Departamento>> findAll(Departamento dep) {
+		return ResponseEntity.ok().body(depService.listarTodos());
 	}
-	
+
+	@PutMapping(value = "/{depId}")
+	public ResponseEntity<Departamento> alterarDepartamento(@RequestBody Departamento dep, @PathVariable Long depId) {
+		if (!depRepo.existsById(depId)) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok().body(depService.alterar(dep, depId));
+	}
+
 	@DeleteMapping("/{depId}")
-	public ResponseEntity<Void> deletarDepartamento(@PathVariable Long depId){
-		if(!depRepo.existsById(depId)) {
+	public ResponseEntity<Void> deletarDepartamento(@PathVariable Long depId) {
+		if (!depRepo.existsById(depId)) {
 			return ResponseEntity.noContent().build();
 		}
-		
-		depRepo.deleteById(depId);
+		depService.deletar(depId);
 		return ResponseEntity.noContent().build();
-		
-	}
-	
-	@PutMapping("/{depId}")
-	public ResponseEntity<Departamento> atualizarDep(@PathVariable Long depId, @RequestBody Departamento dep){
-		if(!depRepo.existsById(depId)) {
-			return ResponseEntity.noContent().build();
-		}
-		
-		dep.setId(depId);
-		dep = depRepo.save(dep);
-		return ResponseEntity.ok(dep);
 	}
 }

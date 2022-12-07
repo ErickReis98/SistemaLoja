@@ -1,4 +1,4 @@
-package br.com.sistemaloja.domain.controller.model;
+package br.com.sistemaloja.domain.model;
 
 import java.util.List;
 
@@ -9,12 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 
 @Entity
+@Table(name = "departamento")
 public class Departamento {
 
 	@EqualsAndHashCode.Include
@@ -47,12 +49,12 @@ public class Departamento {
 	}
 
 	@JsonIgnore
-	public List<Funcionario> getVendedor() {
+	public List<Funcionario> getFuncionario() {
 		return funcionario;
 	}
 
 	@JsonIgnore
-	public void setVendedor(List<Funcionario> funcionario) {
+	public void setFuncionario(List<Funcionario> funcionario) {
 		this.funcionario = funcionario;
 	}
 

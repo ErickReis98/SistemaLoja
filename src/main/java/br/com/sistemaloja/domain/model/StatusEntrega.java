@@ -1,4 +1,4 @@
-package br.com.sistemaloja.domain.controller.model;
+package br.com.sistemaloja.domain.model;
 
 public enum StatusEntrega {
 

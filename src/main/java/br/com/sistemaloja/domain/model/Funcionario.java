@@ -1,4 +1,4 @@
-package br.com.sistemaloja.domain.controller.model;
+package br.com.sistemaloja.domain.model;
 
 import java.math.BigDecimal;
 import java.util.Date;

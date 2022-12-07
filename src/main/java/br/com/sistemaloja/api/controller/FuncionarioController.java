@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sistemaloja.domain.controller.model.Funcionario;
-import br.com.sistemaloja.domain.controller.repository.FuncionarioRepository;
+import br.com.sistemaloja.domain.model.Funcionario;
+import br.com.sistemaloja.domain.repository.FuncionarioRepository;
+import br.com.sistemaloja.domain.service.FuncionarioService;
 
 @RestController
 @RequestMapping(value = "/funcionarios")
@@ -26,56 +27,45 @@ public class FuncionarioController {
 
 	@Autowired
 	private FuncionarioRepository funcRepo;
-	
-	
+
+	private FuncionarioService funcServ;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Funcionario adicionarDepartamento(@RequestBody Funcionario func) {
-		return funcRepo.save(func);
+	public ResponseEntity<Funcionario> adicionarFuncionario(@RequestBody Funcionario func) {
+		return ResponseEntity.ok().body(funcServ.adicionar(func));
 	}
 
 	@GetMapping
 	public ResponseEntity<List<Funcionario>> findAll() {
-		List<Funcionario> func = funcRepo.findAll();
-		return ResponseEntity.ok().body(func);
+		return ResponseEntity.ok().body(funcServ.listarTodos());
 	}
-	
-	
+
+	@PutMapping(value = "/{funcId}")
+	public ResponseEntity<Funcionario> alterarDepartamento(@RequestBody Funcionario func, @PathVariable Long funcId) {
+		if (!funcRepo.existsById(funcId)) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok().body(funcServ.alterar(func, funcId));
+	}
+
+	@DeleteMapping("/{funcId}")
+	public ResponseEntity<Void> deletarDepartamento(@PathVariable Long funcId) {
+		if (!funcRepo.existsById(funcId)) {
+			return ResponseEntity.noContent().build();
+		}
+		funcServ.deletar(funcId);
+		return ResponseEntity.noContent().build();
+	}
+
 	@GetMapping(value = "findByDep")
-	public ResponseEntity<List<Object>> findByDep(@RequestParam(name = "departamento_id") Long departamento_id) {
-		List<Object> func = funcRepo.findByDepContaning(departamento_id);
-		return new ResponseEntity<List<Object>>(func, HttpStatus.OK);
+	public ResponseEntity<List<Object>> findByDep(@RequestParam(name = "id_departamento") Long id_departamento) {
+		return new ResponseEntity<List<Object>>(funcServ.findByDepartamento(id_departamento), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "findByNome")
 	@ResponseBody
-	public ResponseEntity<List<Object>> findByNome(@RequestParam (name = "nome")String nome){
-		List<Object> func = funcRepo.findByNomeContaining(nome);
-		return new ResponseEntity<List<Object>>(func, HttpStatus.OK);
+	public ResponseEntity<List<Object>> findByNome(@RequestParam(name = "nome") String nome) {
+		return new ResponseEntity<List<Object>>(funcServ.findByNome(nome), HttpStatus.OK);
 	}
-	 
-
-
-
-	@DeleteMapping({"/{vendId}"})
-	public ResponseEntity<Void> deletarVend(@PathVariable Long vendId) {
-		if (!funcRepo.existsById(vendId)) {
-			return ResponseEntity.noContent().build();
-		}
-		funcRepo.deleteById(vendId);
-		return ResponseEntity.noContent().build();
-
-	}
-
-	@PutMapping("{vendId}")
-	public ResponseEntity<Funcionario> atualizarVend(@PathVariable Long vendId, @RequestBody Funcionario funcionario) {
-		if (!funcRepo.existsById(vendId)) {
-			return ResponseEntity.noContent().build();
-		}
-		funcionario.setId(vendId);
-		funcionario = funcRepo.save(funcionario);
-		return ResponseEntity.ok(funcionario);
-	}
-
 }
