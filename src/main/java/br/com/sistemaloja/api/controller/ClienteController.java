@@ -2,6 +2,8 @@ package br.com.sistemaloja.api.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +43,7 @@ public class ClienteController {
 
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Cliente adicionar(@RequestBody Cliente cliente) {
+	public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
 		return cService.salvar(cliente);
 	}
 
@@ -52,9 +54,10 @@ public class ClienteController {
 	}
 
 	@PutMapping("/{clienteId}")
-	public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteId, @RequestBody Cliente cliente) {
+	public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId, @RequestBody Cliente cliente) {
 		if (!cRepository.existsById(clienteId)) {
-			return ResponseEntity.notFound().build();
+			cService.buscarId(clienteId);
+			return ResponseEntity.ok().build();
 		}
 
 		cliente.setId(clienteId);
@@ -66,7 +69,8 @@ public class ClienteController {
 	@DeleteMapping("/{clienteId}")
 	public ResponseEntity<Void> deletar(@PathVariable Long clienteId) {
 		if (!cRepository.existsById(clienteId)) {
-			return ResponseEntity.notFound().build();
+			cService.buscarId(clienteId);
+			return ResponseEntity.ok().build();
 		}
 
 		cService.excluir(clienteId);

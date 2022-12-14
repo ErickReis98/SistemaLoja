@@ -1,11 +1,11 @@
 package br.com.sistemaloja.domain.service;
 
-
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.sistemaloja.domain.exception.NegocioException;
 import br.com.sistemaloja.domain.model.Cliente;
 import br.com.sistemaloja.domain.repository.ClienteRepository;
 
@@ -20,6 +20,12 @@ public class ClienteService {
 	}
 
 	@Transactional
+	public Cliente buscarId(Long clienteId) {
+		return cRepository.findById(clienteId)
+				.orElseThrow(() -> new NegocioException("Cliente não encontrado"));
+	}
+
+	@Transactional
 	public Cliente salvar(Cliente cliente) {
 		return cRepository.save(cliente);
 	}
@@ -28,7 +34,7 @@ public class ClienteService {
 	public void excluir(Long clienteId) {
 		cRepository.deleteById(clienteId);
 	}
-	
+
 	@Transactional
 	public Cliente alterar(Long id, Cliente cliente) {
 		cliente.setId(id);
@@ -39,6 +45,5 @@ public class ClienteService {
 	public List<Cliente> listarTodos() {
 		return cRepository.findAll();
 	}
-	
-	
+
 }

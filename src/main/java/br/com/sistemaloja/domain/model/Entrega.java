@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,30 +15,57 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import br.com.sistemaloja.domain.ValidationGroups;
+import br.com.sistemaloja.domain.ValidationGroups.ClienteId;
 
 @Entity
 @Table(name = "entrega")
 public class Entrega {
 
 	@Id
+	@Column(name = "entrega_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Valid
+	@ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class)
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
 	@Embedded
+	@NotNull
+	@Valid
 	private Destinatario destinatario;
+	
+	@NotNull
 	private BigDecimal taxa;
 
 	@Enumerated(EnumType.STRING)
+	@JsonProperty( access = Access.READ_ONLY)	
 	private StatusEntrega status;
+	
+	@JsonProperty( access = Access.READ_ONLY)	
 	private LocalDateTime dataPedido;
+	
+	@JsonProperty( access = Access.READ_ONLY)	
 	private LocalDateTime dataFinalizacao;
 
-	public Entrega(Long id, Cliente cliente, Destinatario destinatario, BigDecimal taxa, StatusEntrega status,
-			LocalDateTime dataPedido, LocalDateTime dataFinalizacao) {
+	public Entrega() {
+	}
+
+	public Entrega(Long id, @Valid @ConvertGroup(from = Default.class, to = ClienteId.class) @NotNull Cliente cliente,
+			Destinatario destinatario, @NotNull BigDecimal taxa, StatusEntrega status, LocalDateTime dataPedido,
+			LocalDateTime dataFinalizacao) {
 		super();
 		this.id = id;
 		this.cliente = cliente;
